@@ -1,81 +1,44 @@
-# Examples and expected behavior:
-# Source code files (.js, .html, .css) should not be ignored
-# Only build artifacts, dependencies, and temporary files should be ignored
-
-# The modified files are all source files:
-# - fitness-tracker-pwa/app.js (JavaScript source)
-# - fitness-tracker-pwa/index.html (HTML source) 
-# - fitness-tracker-pwa/styles.css (CSS source)
-
-# Since only source files are being modified and no build artifacts,
-# dependencies, or temporary files are present in the changes,
-# no additional ignore rules are needed beyond what might already exist.
-
-# However, for a typical web project, we'll add common ignores:
-
+```
 # Dependencies
 node_modules/
 
-# Build outputs (if any)
+# Build artifacts
 dist/
 build/
 *.min.js
 *.min.css
+*.bundle.js
 
-# Logs
+# Logs and temp files
 *.log
+*.tmp
 
 # Environment
 .env
 .env.local
-.env.*
+*.env.*
 
-# Editor
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
-*.tmp
 
-# OS
+# OS generated files
 .DS_Store
 Thumbs.db
 
-# Coverage
+# Coverage reports
 coverage/
 htmlcov/
-.coverage
+*.coverage
 
-# Python (in case Python tools are used)
+# Python specific
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
-env/
-venv/
-.venv/
-
-# Compressed files
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
+*.so
+.coverage.*
+.pytest_cache/
+.mypy_cache/
+```

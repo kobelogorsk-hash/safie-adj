@@ -1016,3 +1016,40 @@ body {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
+
+/* Footer Styles */
+.app-footer {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    box-shadow: 0 -4px 20px rgba(255, 107, 107, 0.3);
+}
+
+.app-footer p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.footer-version {
+    font-size: 0.75rem !important;
+    opacity: 0.8;
+    margin-top: 8px !important;
+}
+
+@media (max-width: 480px) {
+    .app-footer {
+        padding: 15px;
+    }
+    
+    .app-footer p {
+        font-size: 0.8rem;
+    }
+    
+    .footer-version {
+        font-size: 0.7rem !important;
+    }
+}
