@@ -13,75 +13,90 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Language Selection Screen -->
+    <div class="language-overlay" id="languageOverlay">
+        <div class="language-modal">
+            <div class="language-header">
+                <span class="header-decoration">🌸</span>
+                <h1 data-translate="selectLanguage">Выберите язык</h1>
+                <p data-translate="chooseYourLanguage">Выберите ваш предпочтительный язык</p>
+            </div>
+            
+            <div class="language-grid" id="languageGrid">
+                <!-- Languages will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <!-- Onboarding Modal -->
-    <div class="onboarding-overlay" id="onboardingOverlay">
+    <div class="onboarding-overlay" id="onboardingOverlay" style="display: none;">
         <div class="onboarding-modal">
             <div class="onboarding-header">
                 <span class="header-decoration">🌸</span>
-                <h1>Добро пожаловать!</h1>
-                <p>Давайте познакомимся и настроим ваш трекер</p>
+                <h1 data-translate="welcome">Добро пожаловать!</h1>
+                <p data-translate="letsGetStarted">Давайте познакомимся и настроим ваш трекер</p>
             </div>
             
             <form id="onboardingForm" class="onboarding-form">
                 <div class="form-step active" data-step="1">
-                    <div class="step-indicator">Шаг 1 из 4</div>
-                    <h2>Как к вам обращаться?</h2>
+                    <div class="step-indicator" data-translate="step1of4">Шаг 1 из 4</div>
+                    <h2 data-translate="whatsYourName">Как к вам обращаться?</h2>
                     <div class="input-group">
-                        <input type="text" id="userName" placeholder="Введите ваше имя" required maxlength="20">
-                        <label for="userName">Ваше имя</label>
+                        <input type="text" id="userName" placeholder="" required maxlength="20">
+                        <label for="userName" data-translate="yourName">Ваше имя</label>
                     </div>
-                    <button type="button" class="btn-next" onclick="nextStep(1)">Далее →</button>
+                    <button type="button" class="btn-next" onclick="nextStep(1)" data-translate="next">Далее →</button>
                 </div>
                 
                 <div class="form-step" data-step="2">
-                    <div class="step-indicator">Шаг 2 из 4</div>
-                    <h2>Сколько вам лет?</h2>
+                    <div class="step-indicator" data-translate="step2of4">Шаг 2 из 4</div>
+                    <h2 data-translate="howOldAreYou">Сколько вам лет?</h2>
                     <div class="input-group">
-                        <input type="number" id="userAge" placeholder="Ваш возраст" required min="10" max="100">
-                        <label for="userAge">Возраст</label>
+                        <input type="number" id="userAge" placeholder="" required min="10" max="100">
+                        <label for="userAge" data-translate="age">Возраст</label>
                     </div>
                     <div class="step-nav">
-                        <button type="button" class="btn-prev" onclick="prevStep(2)">← Назад</button>
-                        <button type="button" class="btn-next" onclick="nextStep(2)">Далее →</button>
+                        <button type="button" class="btn-prev" onclick="prevStep(2)" data-translate="back">← Назад</button>
+                        <button type="button" class="btn-next" onclick="nextStep(2)" data-translate="next">Далее →</button>
                     </div>
                 </div>
                 
                 <div class="form-step" data-step="3">
-                    <div class="step-indicator">Шаг 3 из 4</div>
-                    <h2>Какой у вас вес?</h2>
+                    <div class="step-indicator" data-translate="step3of4">Шаг 3 из 4</div>
+                    <h2 data-translate="whatsYourWeight">Какой у вас вес?</h2>
                     <div class="input-group">
-                        <input type="number" id="userWeight" placeholder="Вес в кг" required min="30" max="300" step="0.1">
-                        <label for="userWeight">Вес (кг)</label>
+                        <input type="number" id="userWeight" placeholder="" required min="30" max="300" step="0.1">
+                        <label for="userWeight" data-translate="weightKg">Вес (кг)</label>
                     </div>
                     <div class="step-nav">
-                        <button type="button" class="btn-prev" onclick="prevStep(3)">← Назад</button>
-                        <button type="button" class="btn-next" onclick="nextStep(3)">Далее →</button>
+                        <button type="button" class="btn-prev" onclick="prevStep(3)" data-translate="back">← Назад</button>
+                        <button type="button" class="btn-next" onclick="nextStep(3)" data-translate="next">Далее →</button>
                     </div>
                 </div>
                 
                 <div class="form-step" data-step="4">
-                    <div class="step-indicator">Шаг 4 из 4</div>
-                    <h2>Ваша цель на день?</h2>
+                    <div class="step-indicator" data-translate="step4of4">Шаг 4 из 4</div>
+                    <h2 data-translate="dailyGoal">Ваша цель на день?</h2>
                     <div class="goal-selector">
                         <button type="button" class="goal-option" data-goal="6000" onclick="selectGoal(6000)">
                             <span class="goal-icon">🚶</span>
                             <span class="goal-value">6,000</span>
-                            <span class="goal-label">Лёгкий</span>
+                            <span class="goal-label" data-translate="easy">Лёгкий</span>
                         </button>
                         <button type="button" class="goal-option selected" data-goal="10000" onclick="selectGoal(10000)">
                             <span class="goal-icon">🏃</span>
                             <span class="goal-value">10,000</span>
-                            <span class="goal-label">Средний</span>
+                            <span class="goal-label" data-translate="medium">Средний</span>
                         </button>
                         <button type="button" class="goal-option" data-goal="15000" onclick="selectGoal(15000)">
                             <span class="goal-icon">🔥</span>
                             <span class="goal-value">15,000</span>
-                            <span class="goal-label">Активный</span>
+                            <span class="goal-label" data-translate="active">Активный</span>
                         </button>
                     </div>
                     <div class="step-nav">
-                        <button type="button" class="btn-prev" onclick="prevStep(4)">← Назад</button>
-                        <button type="submit" class="btn-finish">Начать! 🎉</button>
+                        <button type="button" class="btn-prev" onclick="prevStep(4)" data-translate="back">← Назад</button>
+                        <button type="submit" class="btn-finish" data-translate="start">Начать! 🎉</button>
                     </div>
                 </div>
             </form>

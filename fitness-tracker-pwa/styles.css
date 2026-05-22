@@ -1,4 +1,4 @@
-/* Korean-style Fitness Tracker PWA Styles - Russian Version */
+/* Korean-style Fitness Tracker PWA Styles - Multi-language Version */
 
 :root {
     --primary-color: #FF6B6B;
@@ -31,6 +31,10 @@ body {
     overflow-x: hidden;
 }
 
+body.rtl {
+    direction: rtl;
+}
+
 .app-container {
     max-width: 480px;
     margin: 0 auto;
@@ -38,6 +42,90 @@ body {
     background: var(--white);
     position: relative;
     padding-bottom: 80px;
+}
+
+/* Language Overlay */
+.language-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.language-modal {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 30px 25px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.5s ease;
+}
+
+.language-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.language-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.language-header p {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+.language-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.language-card {
+    background: var(--white);
+    border: 2px solid #e9ecef;
+    border-radius: var(--radius-sm);
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-light);
+}
+
+.language-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.2);
+}
+
+.lang-flag {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+}
+
+.lang-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    text-align: center;
 }
 
 /* Onboarding Modal */
