@@ -1,0 +1,42 @@
+```
+# Dependencies
+node_modules/
+
+# Package lock file
+package-lock.json
+
+# IDE files
+.vscode/
+
+# Environment files
+.env
+.env.local
+.env.*
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+
+# Build artifacts
+dist/
+build/
+target/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Coverage reports
+coverage/
+htmlcov/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+```
