@@ -1,4 +1,300 @@
-// Fitness Tracker PWA - Russian Version with Korean Style Design
+// Fitness Tracker PWA - Multi-language Version with Korean Style Design
+
+// Available languages with flags and native names
+const languages = [
+    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'ko', name: '한국어', flag: '🇰🇷' },
+    { code: 'zh', name: '中文', flag: '🇨🇳' },
+    { code: 'ja', name: '日本語', flag: '🇯🇵' },
+    { code: 'es', name: 'Español', flag: '🇪🇸' },
+    { code: 'fr', name: 'Français', flag: '🇫🇷' },
+    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+    { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+    { code: 'pt', name: 'Português', flag: '🇵🇹' },
+    { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+    { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' }
+];
+
+// Translations for all UI elements
+const translations = {
+    ru: {
+        selectLanguage: 'Выберите язык',
+        chooseYourLanguage: 'Выберите ваш предпочтительный язык',
+        welcome: 'Добро пожаловать!',
+        letsGetStarted: 'Давайте познакомимся и настроим ваш трекер',
+        step1of4: 'Шаг 1 из 4',
+        whatsYourName: 'Как к вам обращаться?',
+        yourName: 'Ваше имя',
+        next: 'Далее →',
+        back: '← Назад',
+        step2of4: 'Шаг 2 из 4',
+        howOldAreYou: 'Сколько вам лет?',
+        age: 'Возраст',
+        step3of4: 'Шаг 3 из 4',
+        whatsYourWeight: 'Какой у вас вес?',
+        weightKg: 'Вес (кг)',
+        step4of4: 'Шаг 4 из 4',
+        dailyGoal: 'Ваша цель на день?',
+        easy: 'Лёгкий',
+        medium: 'Средний',
+        active: 'Активный',
+        start: 'Начать! 🎉'
+    },
+    en: {
+        selectLanguage: 'Select Language',
+        chooseYourLanguage: 'Choose your preferred language',
+        welcome: 'Welcome!',
+        letsGetStarted: "Let's get to know each other and set up your tracker",
+        step1of4: 'Step 1 of 4',
+        whatsYourName: 'What should we call you?',
+        yourName: 'Your name',
+        next: 'Next →',
+        back: '← Back',
+        step2of4: 'Step 2 of 4',
+        howOldAreYou: 'How old are you?',
+        age: 'Age',
+        step3of4: 'Step 3 of 4',
+        whatsYourWeight: 'What is your weight?',
+        weightKg: 'Weight (kg)',
+        step4of4: 'Step 4 of 4',
+        dailyGoal: 'Your daily goal?',
+        easy: 'Easy',
+        medium: 'Medium',
+        active: 'Active',
+        start: 'Start! 🎉'
+    },
+    ko: {
+        selectLanguage: '언어 선택',
+        chooseYourLanguage: '선호하는 언어를 선택하세요',
+        welcome: '환영합니다!',
+        letsGetStarted: '서로를 알아가고 트래커를 설정해봅시다',
+        step1of4: '4 단계 중 1 단계',
+        whatsYourName: '이름은 무엇인가요?',
+        yourName: '이름',
+        next: '다음 →',
+        back: '← 뒤로',
+        step2of4: '4 단계 중 2 단계',
+        howOldAreYou: '나이는 어떻게 되나요?',
+        age: '나이',
+        step3of4: '4 단계 중 3 단계',
+        whatsYourWeight: '체중은 어떻게 되나요?',
+        weightKg: '체중 (kg)',
+        step4of4: '4 단계 중 4 단계',
+        dailyGoal: '하루 목표는?',
+        easy: '쉬움',
+        medium: '보통',
+        active: '활동적',
+        start: '시작! 🎉'
+    },
+    zh: {
+        selectLanguage: '选择语言',
+        chooseYourLanguage: '选择您喜欢的语言',
+        welcome: '欢迎！',
+        letsGetStarted: '让我们互相了解并设置您的追踪器',
+        step1of4: '第 1 步，共 4 步',
+        whatsYourName: '我们该怎么称呼您？',
+        yourName: '您的名字',
+        next: '下一步 →',
+        back: '← 返回',
+        step2of4: '第 2 步，共 4 步',
+        howOldAreYou: '您多大了？',
+        age: '年龄',
+        step3of4: '第 3 步，共 4 步',
+        whatsYourWeight: '您的体重是多少？',
+        weightKg: '体重（公斤）',
+        step4of4: '第 4 步，共 4 步',
+        dailyGoal: '您的每日目标？',
+        easy: '轻松',
+        medium: '中等',
+        active: '活跃',
+        start: '开始！🎉'
+    },
+    ja: {
+        selectLanguage: '言語を選択',
+        chooseYourLanguage: 'お好みの言語を選択してください',
+        welcome: 'ようこそ！',
+        letsGetStarted: 'お互いを知り、トラッカーを設定しましょう',
+        step1of4: 'ステップ 1/4',
+        whatsYourName: 'お名前は何ですか？',
+        yourName: 'お名前',
+        next: '次へ →',
+        back: '← 戻る',
+        step2of4: 'ステップ 2/4',
+        howOldAreYou: '年齢はいくつですか？',
+        age: '年齢',
+        step3of4: 'ステップ 3/4',
+        whatsYourWeight: '体重是多少？',
+        weightKg: '体重（kg）',
+        step4of4: 'ステップ 4/4',
+        dailyGoal: '1 日の目標は？',
+        easy: '簡単',
+        medium: '普通',
+        active: 'アクティブ',
+        start: '開始！🎉'
+    },
+    es: {
+        selectLanguage: 'Seleccionar idioma',
+        chooseYourLanguage: 'Elige tu idioma preferido',
+        welcome: '¡Bienvenido!',
+        letsGetStarted: 'Conozcámonos y configuremos tu rastreador',
+        step1of4: 'Paso 1 de 4',
+        whatsYourName: '¿Cómo te llamamos?',
+        yourName: 'Tu nombre',
+        next: 'Siguiente →',
+        back: '← Atrás',
+        step2of4: 'Paso 2 de 4',
+        howOldAreYou: '¿Cuántos años tienes?',
+        age: 'Edad',
+        step3of4: 'Paso 3 de 4',
+        whatsYourWeight: '¿Cuál es tu peso?',
+        weightKg: 'Peso (kg)',
+        step4of4: 'Paso 4 de 4',
+        dailyGoal: '¿Tu objetivo diario?',
+        easy: 'Fácil',
+        medium: 'Medio',
+        active: 'Activo',
+        start: '¡Comenzar! 🎉'
+    },
+    fr: {
+        selectLanguage: 'Sélectionner la langue',
+        chooseYourLanguage: 'Choisissez votre langue préférée',
+        welcome: 'Bienvenue !',
+        letsGetStarted: 'Faisons connaissance et configurons votre tracker',
+        step1of4: 'Étape 1 sur 4',
+        whatsYourName: 'Comment vous appeler ?',
+        yourName: 'Votre nom',
+        next: 'Suivant →',
+        back: '← Retour',
+        step2of4: 'Étape 2 sur 4',
+        howOldAreYou: 'Quel âge avez-vous ?',
+        age: 'Âge',
+        step3of4: 'Étape 3 sur 4',
+        whatsYourWeight: 'Quel est votre poids ?',
+        weightKg: 'Poids (kg)',
+        step4of4: 'Étape 4 sur 4',
+        dailyGoal: 'Votre objectif quotidien ?',
+        easy: 'Facile',
+        medium: 'Moyen',
+        active: 'Actif',
+        start: 'Commencer ! 🎉'
+    },
+    de: {
+        selectLanguage: 'Sprache auswählen',
+        chooseYourLanguage: 'Wählen Sie Ihre bevorzugte Sprache',
+        welcome: 'Willkommen!',
+        letsGetStarted: 'Lernen wir uns kennen und richten Sie Ihren Tracker ein',
+        step1of4: 'Schritt 1 von 4',
+        whatsYourName: 'Wie sollen wir Sie nennen?',
+        yourName: 'Ihr Name',
+        next: 'Weiter →',
+        back: '← Zurück',
+        step2of4: 'Schritt 2 von 4',
+        howOldAreYou: 'Wie alt sind Sie?',
+        age: 'Alter',
+        step3of4: 'Schritt 3 von 4',
+        whatsYourWeight: 'Wie viel wiegen Sie?',
+        weightKg: 'Gewicht (kg)',
+        step4of4: 'Schritt 4 von 4',
+        dailyGoal: 'Ihr Tagesziel?',
+        easy: 'Einfach',
+        medium: 'Mittel',
+        active: 'Aktiv',
+        start: 'Starten! 🎉'
+    },
+    it: {
+        selectLanguage: 'Seleziona lingua',
+        chooseYourLanguage: 'Scegli la tua lingua preferita',
+        welcome: 'Benvenuto!',
+        letsGetStarted: 'Conosciamoci e configura il tuo tracker',
+        step1of4: 'Passaggio 1 di 4',
+        whatsYourName: 'Come ti chiamiamo?',
+        yourName: 'Il tuo nome',
+        next: 'Avanti →',
+        back: '← Indietro',
+        step2of4: 'Passaggio 2 di 4',
+        howOldAreYou: 'Quanti anni hai?',
+        age: 'Età',
+        step3of4: 'Passaggio 3 di 4',
+        whatsYourWeight: 'Qual è il tuo peso?',
+        weightKg: 'Peso (kg)',
+        step4of4: 'Passaggio 4 di 4',
+        dailyGoal: 'Il tuo obiettivo giornaliero?',
+        easy: 'Facile',
+        medium: 'Medio',
+        active: 'Attivo',
+        start: 'Inizia! 🎉'
+    },
+    pt: {
+        selectLanguage: 'Selecionar idioma',
+        chooseYourLanguage: 'Escolha seu idioma preferido',
+        welcome: 'Bem-vindo!',
+        letsGetStarted: 'Vamos nos conhecer e configurar seu rastreador',
+        step1of4: 'Passo 1 de 4',
+        whatsYourName: 'Como devemos chamá-lo?',
+        yourName: 'Seu nome',
+        next: 'Próximo →',
+        back: '← Voltar',
+        step2of4: 'Passo 2 de 4',
+        howOldAreYou: 'Quantos anos você tem?',
+        age: 'Idade',
+        step3of4: 'Passo 3 de 4',
+        whatsYourWeight: 'Qual é o seu peso?',
+        weightKg: 'Peso (kg)',
+        step4of4: 'Passo 4 de 4',
+        dailyGoal: 'Sua meta diária?',
+        easy: 'Fácil',
+        medium: 'Médio',
+        active: 'Ativo',
+        start: 'Começar! 🎉'
+    },
+    ar: {
+        selectLanguage: 'اختر اللغة',
+        chooseYourLanguage: 'اختر لغتك المفضلة',
+        welcome: 'مرحباً!',
+        letsGetStarted: 'دعنا نتعرف على بعضنا ونقوم بإعداد المتتبع الخاص بك',
+        step1of4: 'الخطوة 1 من 4',
+        whatsYourName: 'كيف نناديك؟',
+        yourName: 'اسمك',
+        next: 'التالي →',
+        back: '← رجوع',
+        step2of4: 'الخطوة 2 من 4',
+        howOldAreYou: 'كم عمرك؟',
+        age: 'العمر',
+        step3of4: 'الخطوة 3 من 4',
+        whatsYourWeight: 'ما هو وزنك؟',
+        weightKg: 'الوزن (كجم)',
+        step4of4: 'الخطوة 4 من 4',
+        dailyGoal: 'هدفك اليومي؟',
+        easy: 'سهل',
+        medium: 'متوسط',
+        active: 'نشط',
+        start: 'ابدأ! 🎉'
+    },
+    hi: {
+        selectLanguage: 'भाषा चुनें',
+        chooseYourLanguage: 'अपनी पसंदीदा भाषा चुनें',
+        welcome: 'स्वागत है!',
+        letsGetStarted: 'आइए एक-दूसरे को जानें और अपने ट्रैकर को सेट करें',
+        step1of4: 'चरण 1 से 4',
+        whatsYourName: 'हम आपको क्या कहें?',
+        yourName: 'आपका नाम',
+        next: 'आगे →',
+        back: '← वापस',
+        step2of4: 'चरण 2 से 4',
+        howOldAreYou: 'आपकी उम्र क्या है?',
+        age: 'उम्र',
+        step3of4: 'चरण 3 से 4',
+        whatsYourWeight: 'आपका वजन क्या है?',
+        weightKg: 'वजन (किलो)',
+        step4of4: 'चरण 4 से 4',
+        dailyGoal: 'आपका दैनिक लक्ष्य?',
+        easy: 'आसान',
+        medium: 'मध्यम',
+        active: 'सक्रिय',
+        start: 'शुरू करें! 🎉'
+    }
+};
 
 // App State
 const state = {
@@ -10,7 +306,8 @@ const state = {
     weeklyData: [],
     userProfile: null,
     achievements: [],
-    isNewUser: true
+    isNewUser: true,
+    currentLanguage: 'ru'
 };
 
 // Russian motivational quotes
@@ -37,26 +334,97 @@ const achievementsList = [
 
 // Initialize App
 document.addEventListener('DOMContentLoaded', () => {
+    initLanguageSelector();
     checkOnboarding();
     setupNavigation();
     loadAchievements();
 });
 
+// Initialize Language Selector
+function initLanguageSelector() {
+    const languageGrid = document.getElementById('languageGrid');
+    const savedLanguage = localStorage.getItem('selectedLanguage') || 'ru';
+    
+    languages.forEach(lang => {
+        const langCard = document.createElement('div');
+        langCard.className = 'language-card';
+        langCard.dataset.lang = lang.code;
+        langCard.innerHTML = `
+            <span class="lang-flag">${lang.flag}</span>
+            <span class="lang-name">${lang.name}</span>
+        `;
+        langCard.addEventListener('click', () => selectLanguage(lang.code));
+        languageGrid.appendChild(langCard);
+    });
+    
+    // Apply saved language
+    if (savedLanguage !== 'ru') {
+        state.currentLanguage = savedLanguage;
+        applyTranslations(savedLanguage);
+    }
+}
+
+// Select Language
+function selectLanguage(langCode) {
+    state.currentLanguage = langCode;
+    localStorage.setItem('selectedLanguage', langCode);
+    applyTranslations(langCode);
+    
+    // Hide language overlay and show onboarding
+    document.getElementById('languageOverlay').style.display = 'none';
+    document.getElementById('onboardingOverlay').style.display = 'flex';
+}
+
+// Apply Translations
+function applyTranslations(langCode) {
+    const t = translations[langCode] || translations.ru;
+    
+    document.querySelectorAll('[data-translate]').forEach(el => {
+        const key = el.dataset.translate;
+        if (t[key]) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = t[key];
+            } else {
+                el.textContent = t[key];
+            }
+        }
+    });
+    
+    // Update HTML lang attribute
+    document.documentElement.lang = langCode;
+    
+    // Handle RTL for Arabic
+    if (langCode === 'ar') {
+        document.body.classList.add('rtl');
+    } else {
+        document.body.classList.remove('rtl');
+    }
+}
+
 // Check if user completed onboarding
 function checkOnboarding() {
     const savedProfile = localStorage.getItem('userProfile');
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    
+    if (savedLanguage) {
+        state.currentLanguage = savedLanguage;
+        applyTranslations(savedLanguage);
+    }
+    
     if (savedProfile) {
         state.userProfile = JSON.parse(savedProfile);
         state.isNewUser = false;
-        document.getElementById('onboardingOverlay').classList.add('hidden');
+        document.getElementById('languageOverlay').style.display = 'none';
+        document.getElementById('onboardingOverlay').style.display = 'none';
         loadData();
         updateUI();
         generateWeeklyChart();
         setDailyQuote();
         renderAchievements();
     } else {
-        // Show onboarding
-        document.getElementById('onboardingOverlay').classList.remove('hidden');
+        // Show language selector first
+        document.getElementById('languageOverlay').style.display = 'flex';
+        document.getElementById('onboardingOverlay').style.display = 'none';
     }
 }
 
@@ -903,17 +1271,5 @@ function showAchievementDetail(id) {
 function showDayDetails(dayName, steps) {
     showToast(`${dayName}: ${steps.toLocaleString()} шагов`);
 }
-
-// PWA Install Prompt
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-});
-
-window.addEventListener('appinstalled', () => {
-    deferredPrompt = null;
-});
 
 console.log('🌸 Здоровый Друг - Фитнес-трекер готов к работе!');
