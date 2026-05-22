@@ -1,1 +1,81 @@
-Nothing needs to be added to .gitignore since the only change is adding a markdown documentation file (DEPLOY_INSTRUCTIONS.md) which should not be ignored.
+# Examples and expected behavior:
+# Source code files (.js, .html, .css) should not be ignored
+# Only build artifacts, dependencies, and temporary files should be ignored
+
+# The modified files are all source files:
+# - fitness-tracker-pwa/app.js (JavaScript source)
+# - fitness-tracker-pwa/index.html (HTML source) 
+# - fitness-tracker-pwa/styles.css (CSS source)
+
+# Since only source files are being modified and no build artifacts,
+# dependencies, or temporary files are present in the changes,
+# no additional ignore rules are needed beyond what might already exist.
+
+# However, for a typical web project, we'll add common ignores:
+
+# Dependencies
+node_modules/
+
+# Build outputs (if any)
+dist/
+build/
+*.min.js
+*.min.css
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Python (in case Python tools are used)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Compressed files
+*.zip
+*.gz
+*.tar
+*.tgz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst

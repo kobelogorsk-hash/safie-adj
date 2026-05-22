@@ -1,59 +1,173 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FF6B6B">
-    <meta name="description" content="한국 스타일 피트니스 트래커 - Korean Fitness Tracker">
-    <title>건강친구 | Korean Fitness Tracker</title>
+    <meta name="description" content="Фитнес-трекер в корейском стиле">
+    <title>Здоровый Друг | Фитнес-трекер</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="icon-192.png">
     <link rel="apple-touch-icon" href="icon-192.png">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Onboarding Modal -->
+    <div class="onboarding-overlay" id="onboardingOverlay">
+        <div class="onboarding-modal">
+            <div class="onboarding-header">
+                <span class="header-decoration">🌸</span>
+                <h1>Добро пожаловать!</h1>
+                <p>Давайте познакомимся и настроим ваш трекер</p>
+            </div>
+            
+            <form id="onboardingForm" class="onboarding-form">
+                <div class="form-step active" data-step="1">
+                    <div class="step-indicator">Шаг 1 из 4</div>
+                    <h2>Как к вам обращаться?</h2>
+                    <div class="input-group">
+                        <input type="text" id="userName" placeholder="Введите ваше имя" required maxlength="20">
+                        <label for="userName">Ваше имя</label>
+                    </div>
+                    <button type="button" class="btn-next" onclick="nextStep(1)">Далее →</button>
+                </div>
+                
+                <div class="form-step" data-step="2">
+                    <div class="step-indicator">Шаг 2 из 4</div>
+                    <h2>Сколько вам лет?</h2>
+                    <div class="input-group">
+                        <input type="number" id="userAge" placeholder="Ваш возраст" required min="10" max="100">
+                        <label for="userAge">Возраст</label>
+                    </div>
+                    <div class="step-nav">
+                        <button type="button" class="btn-prev" onclick="prevStep(2)">← Назад</button>
+                        <button type="button" class="btn-next" onclick="nextStep(2)">Далее →</button>
+                    </div>
+                </div>
+                
+                <div class="form-step" data-step="3">
+                    <div class="step-indicator">Шаг 3 из 4</div>
+                    <h2>Какой у вас вес?</h2>
+                    <div class="input-group">
+                        <input type="number" id="userWeight" placeholder="Вес в кг" required min="30" max="300" step="0.1">
+                        <label for="userWeight">Вес (кг)</label>
+                    </div>
+                    <div class="step-nav">
+                        <button type="button" class="btn-prev" onclick="prevStep(3)">← Назад</button>
+                        <button type="button" class="btn-next" onclick="nextStep(3)">Далее →</button>
+                    </div>
+                </div>
+                
+                <div class="form-step" data-step="4">
+                    <div class="step-indicator">Шаг 4 из 4</div>
+                    <h2>Ваша цель на день?</h2>
+                    <div class="goal-selector">
+                        <button type="button" class="goal-option" data-goal="6000" onclick="selectGoal(6000)">
+                            <span class="goal-icon">🚶</span>
+                            <span class="goal-value">6,000</span>
+                            <span class="goal-label">Лёгкий</span>
+                        </button>
+                        <button type="button" class="goal-option selected" data-goal="10000" onclick="selectGoal(10000)">
+                            <span class="goal-icon">🏃</span>
+                            <span class="goal-value">10,000</span>
+                            <span class="goal-label">Средний</span>
+                        </button>
+                        <button type="button" class="goal-option" data-goal="15000" onclick="selectGoal(15000)">
+                            <span class="goal-icon">🔥</span>
+                            <span class="goal-value">15,000</span>
+                            <span class="goal-label">Активный</span>
+                        </button>
+                    </div>
+                    <div class="step-nav">
+                        <button type="button" class="btn-prev" onclick="prevStep(4)">← Назад</button>
+                        <button type="submit" class="btn-finish">Начать! 🎉</button>
+                    </div>
+                </div>
+            </form>
+            
+            <div class="progress-dots">
+                <span class="dot active" data-dot="1"></span>
+                <span class="dot" data-dot="2"></span>
+                <span class="dot" data-dot="3"></span>
+                <span class="dot" data-dot="4"></span>
+            </div>
+        </div>
+    </div>
+
     <div class="app-container">
         <!-- Header -->
         <header class="header">
             <div class="header-content">
-                <h1 class="logo">🌸 건강친구</h1>
-                <p class="subtitle">당신의 건강한 친구</p>
+                <h1 class="logo">🌸 Здоровый Друг</h1>
+                <p class="subtitle" id="userGreeting">Ваш персональный помощник</p>
             </div>
+            <button class="settings-btn" onclick="toggleSettings()" aria-label="Настройки">⚙️</button>
         </header>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel" id="settingsPanel">
+            <div class="settings-header">
+                <h3>Настройки</h3>
+                <button onclick="toggleSettings()" class="close-settings">✕</button>
+            </div>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <span>📊 Экспорт данных</span>
+                    <button onclick="exportData()" class="setting-btn">Сохранить</button>
+                </div>
+                <div class="setting-item">
+                    <span>📥 Импорт данных</span>
+                    <input type="file" id="importFile" accept=".json" onchange="handleFileImport(this)" style="display:none">
+                    <button onclick="document.getElementById('importFile').click()" class="setting-btn">Загрузить</button>
+                </div>
+                <div class="setting-item">
+                    <span>🔄 Сбросить сегодня</span>
+                    <button onclick="resetDailyData()" class="setting-btn danger">Сброс</button>
+                </div>
+                <div class="setting-item">
+                    <span>👤 Профиль</span>
+                    <button onclick="showProfile()" class="setting-btn">Изменить</button>
+                </div>
+            </div>
+        </div>
 
         <!-- Main Content -->
         <main class="main-content">
             <!-- Daily Summary Card -->
             <section class="card daily-summary">
-                <h2>오늘의 활동</h2>
+                <h2><span class="card-icon">📊</span> Сегодня</h2>
                 <div class="summary-grid">
-                    <div class="stat-item">
+                    <div class="stat-item clickable" onclick="addSteps(100)" role="button" tabindex="0">
                         <div class="stat-icon">👟</div>
                         <div class="stat-value" id="steps">0</div>
-                        <div class="stat-label">걸음 수</div>
+                        <div class="stat-label">Шагов</div>
+                        <div class="stat-add-hint">+100</div>
                     </div>
-                    <div class="stat-item">
+                    <div class="stat-item clickable" onclick="addCalories(50)" role="button" tabindex="0">
                         <div class="stat-icon">🔥</div>
                         <div class="stat-value" id="calories">0</div>
-                        <div class="stat-label">칼로리</div>
+                        <div class="stat-label">Ккал</div>
+                        <div class="stat-add-hint">+50</div>
                     </div>
-                    <div class="stat-item">
+                    <div class="stat-item clickable" onclick="addMinutes(10)" role="button" tabindex="0">
                         <div class="stat-icon">⏱️</div>
                         <div class="stat-value" id="minutes">0</div>
-                        <div class="stat-label">활동 시간</div>
+                        <div class="stat-label">Минут</div>
+                        <div class="stat-add-hint">+10</div>
                     </div>
-                    <div class="stat-item">
+                    <div class="stat-item clickable" onclick="addWater(250)" role="button" tabindex="0">
                         <div class="stat-icon">💧</div>
                         <div class="stat-value" id="water">0</div>
-                        <div class="stat-label">물 (ml)</div>
+                        <div class="stat-label">Вода (мл)</div>
+                        <div class="stat-add-hint">+250</div>
                     </div>
                 </div>
             </section>
 
             <!-- Progress Circle -->
             <section class="card progress-section">
-                <h2>목표 달성률</h2>
+                <h2><span class="card-icon">🎯</span> Прогресс цели</h2>
                 <div class="progress-container">
                     <div class="circular-progress">
                         <svg viewBox="0 0 100 100">
@@ -64,70 +178,108 @@
                             <span id="progressPercent">0</span>%
                         </div>
                     </div>
-                    <p class="progress-label">일일 목표</p>
+                    <p class="progress-label">Цель: <span id="dailyGoalDisplay">10,000</span> шагов</p>
+                    <div class="progress-milestones">
+                        <div class="milestone" data-percent="25">25%</div>
+                        <div class="milestone" data-percent="50">50%</div>
+                        <div class="milestone" data-percent="75">75%</div>
+                        <div class="milestone" data-percent="100">100%</div>
+                    </div>
                 </div>
             </section>
 
             <!-- Quick Actions -->
             <section class="card actions-section">
-                <h2>빠른 기록</h2>
+                <h2><span class="card-icon">⚡</span> Быстрое добавление</h2>
                 <div class="action-buttons">
-                    <button class="action-btn" onclick="addSteps(100)">
+                    <button class="action-btn interactive" onclick="addSteps(500)" onmouseenter="this.classList.add('hover')" onmouseleave="this.classList.remove('hover')">
                         <span class="btn-icon">👟</span>
-                        <span>걸음 추가</span>
+                        <span>+500 шагов</span>
                     </button>
-                    <button class="action-btn" onclick="addCalories(50)">
+                    <button class="action-btn interactive" onclick="addCalories(100)" onmouseenter="this.classList.add('hover')" onmouseleave="this.classList.remove('hover')">
                         <span class="btn-icon">🔥</span>
-                        <span>칼로리 추가</span>
+                        <span>+100 ккал</span>
                     </button>
-                    <button class="action-btn" onclick="addWater(250)">
+                    <button class="action-btn interactive" onclick="addWater(500)" onmouseenter="this.classList.add('hover')" onmouseleave="this.classList.remove('hover')">
                         <span class="btn-icon">💧</span>
-                        <span>물 마시기</span>
+                        <span>+500 мл</span>
                     </button>
-                    <button class="action-btn" onclick="addMinutes(10)">
+                    <button class="action-btn interactive" onclick="addMinutes(30)" onmouseenter="this.classList.add('hover')" onmouseleave="this.classList.remove('hover')">
                         <span class="btn-icon">⏱️</span>
-                        <span>운동 추가</span>
+                        <span>+30 мин</span>
                     </button>
+                </div>
+                <div class="custom-action">
+                    <input type="number" id="customSteps" placeholder="Шаги" min="0">
+                    <input type="number" id="customCalories" placeholder="Ккал" min="0">
+                    <input type="number" id="customWater" placeholder="Мл" min="0">
+                    <input type="number" id="customMinutes" placeholder="Мин" min="0">
+                    <button class="btn-add-custom" onclick="addCustomValues()">Добавить</button>
                 </div>
             </section>
 
             <!-- Weekly Chart -->
             <section class="card weekly-section">
-                <h2>주간 활동</h2>
+                <h2><span class="card-icon">📈</span> Недельная активность</h2>
+                <div class="chart-legend">
+                    <span class="legend-item"><span class="legend-color steps"></span> Шаги</span>
+                </div>
                 <div class="weekly-chart" id="weeklyChart">
                     <!-- Chart will be generated by JavaScript -->
+                </div>
+                <div class="chart-stats">
+                    <div class="chart-stat">
+                        <span class="stat-title">Среднее:</span>
+                        <span class="stat-value-small" id="avgSteps">0</span>
+                    </div>
+                    <div class="chart-stat">
+                        <span class="stat-title">Лучший день:</span>
+                        <span class="stat-value-small" id="bestDay">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Achievements -->
+            <section class="card achievements-section">
+                <h2><span class="card-icon">🏆</span> Достижения</h2>
+                <div class="achievements-grid" id="achievementsGrid">
+                    <!-- Achievements will be generated by JavaScript -->
                 </div>
             </section>
 
             <!-- Motivational Quote -->
             <section class="card quote-section">
                 <div class="quote-content">
-                    <p class="quote" id="dailyQuote">"건강은 가장 큰 선물입니다."</p>
-                    <p class="quote-author">- 한국 속담</p>
+                    <p class="quote" id="dailyQuote">"Здоровье — величайшая ценность"</p>
+                    <p class="quote-author">— Мудрость дня</p>
                 </div>
+                <button class="refresh-quote" onclick="setDailyQuote()" aria-label="Обновить цитату">🔄</button>
             </section>
         </main>
 
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
-            <a href="#" class="nav-item active">
+            <a href="#" class="nav-item active" data-page="home">
                 <span class="nav-icon">🏠</span>
-                <span class="nav-label">홈</span>
+                <span class="nav-label">Главная</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-page="stats">
                 <span class="nav-icon">📊</span>
-                <span class="nav-label">통계</span>
+                <span class="nav-label">Статистика</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-page="goals">
                 <span class="nav-icon">🎯</span>
-                <span class="nav-label">목표</span>
+                <span class="nav-label">Цели</span>
             </a>
-            <a href="#" class="nav-item">
-                <span class="nav-icon">⚙️</span>
-                <span class="nav-label">설정</span>
+            <a href="#" class="nav-item" data-page="profile">
+                <span class="nav-icon">👤</span>
+                <span class="nav-label">Профиль</span>
             </a>
         </nav>
     </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
     <script src="app.js"></script>
     <script>
